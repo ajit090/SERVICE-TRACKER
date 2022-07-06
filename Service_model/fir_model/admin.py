@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Fir,Techtracker,Oem,Specification,Application,Customer,Customerissue,Resolutiontype,Status,Diagnosis,Priority,Resolution, AdditionalInfo,Complaint
+from .models import Fir,Techtracker,Oem,Specification,Application,CustomerRaisedBy,Customerissue,Resolutiontype,Status,Diagnosis,Priority,Resolution, AdditionalInfo,Complaint
 from import_export.admin import ImportExportModelAdmin
 from django.contrib.auth.models import Group,User
 from fir_model.models import AuthUser,IsUser
@@ -33,7 +33,7 @@ admin.site.register(Oem)
 admin.site.register(Specification)
 admin.site.register(Application)
 admin.site.register(Customerissue)
-admin.site.register(Customer)
+admin.site.register(CustomerRaisedBy)
 admin.site.register(AdditionalInfo)
 admin.site.register(Resolution)
 admin.site.register(Resolutiontype)

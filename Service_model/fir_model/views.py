@@ -11,8 +11,10 @@ import django_filters
 from django_filters import rest_framework as filters
 from rest_framework.permissions import IsAuthenticated
 
+
 def index(request):
     return HttpResponse("WELCOME TO SERVICE")
+
 
 
 class FirAPIView(APIView):

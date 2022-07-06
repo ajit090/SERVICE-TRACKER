@@ -3,6 +3,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser,User
 from django.utils import timezone
 import datetime
+from django.core.mail import send_mail
+
 
 class IsUser(models.Model):
     user = models.CharField(max_length = 20, unique = True)
@@ -15,10 +17,6 @@ class IsUser(models.Model):
     
 class AuthUser(AbstractUser):
    user = models.ForeignKey(IsUser, on_delete=models.SET_NULL, null=True)
-
-   def __str__(self):
-       return str(self.user)
-   
 
 class Specification(models.Model):
     specification = models.CharField(max_length=150)
@@ -59,11 +57,11 @@ class Customerissue(models.Model):
     def __str__(self):
         return self.name
 
-class Customer(models.Model):
+class CustomerRaisedBy(models.Model):
     customer = models.CharField(max_length=150)
 
     class  Meta:  
-        verbose_name_plural  =  "CUSTOMER"
+        verbose_name_plural  =  "CUSTOMER Raised By"
 
     def __str__(self):
         return self.customer
@@ -140,7 +138,7 @@ class Fir(models.Model):
     location = models.CharField(max_length=100)
     client_name = models.CharField(max_length=100,blank=True)
     contact_no = models.CharField(max_length=50,blank = True)
-    customer_raised_by = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
+    customer_raised_by = models.ForeignKey(CustomerRaisedBy, on_delete=models.SET_NULL, null=True)
     customer_issue = models.ForeignKey(Customerissue, on_delete=models.SET_NULL, null=True,related_name='cissues')
     additional_info =models.ForeignKey(AdditionalInfo, on_delete=models.SET_NULL, null=True,related_name='add')
     resolution_type =  models.ForeignKey(Resolutiontype, on_delete=models.SET_NULL, null=True)
@@ -201,7 +199,7 @@ class Complaint(models.Model):
     location = models.CharField(max_length=100)
     client_name = models.CharField(max_length=100,blank=True)
     contact_no = models.CharField(max_length=50,blank = True)
-    customer_raised_by = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True,blank=True)
+    customer_raised_by = models.ForeignKey(CustomerRaisedBy, on_delete=models.SET_NULL, null=True,blank=True)
     customer_issue = models.ForeignKey(Customerissue, on_delete=models.SET_NULL, null=True,related_name='cissues1',blank=True)
     additional_info =models.ForeignKey(AdditionalInfo, on_delete=models.SET_NULL, null=True,related_name='add2',blank=True)
     resolution_type =  models.ForeignKey(Resolutiontype, on_delete=models.SET_NULL, null=True,blank=True)
@@ -218,6 +216,18 @@ class Complaint(models.Model):
     capacity_after_testing = models.CharField(max_length=100,blank=True)
     final_remarks = models.CharField(max_length=100,blank=True)
     remarks_dispatched = models.CharField(max_length=150,blank=True)
+    
+    def save(self, *args, **kwargs):
+         if self.id:
+            COMPLAINT = Complaint.objects.all()
+            for i in COMPLAINT.iterator():
+                send_mail(
+                    ['id-'+ str(i.complaint_id),'serial_no-' + i.serial_no, 'dealer-' + i.dealer_name],
+                    str(i),
+                    'ajitmuskan09@gmail.com',
+                    ['sajit4862@gmail.com','analytics@inverted.in'],
+                    fail_silently=False,)
+         return super().save(*args, **kwargs)
 
 
     class Meta:
@@ -225,4 +235,3 @@ class Complaint(models.Model):
 
     def __str__(self):
         return self.serial_no
-    

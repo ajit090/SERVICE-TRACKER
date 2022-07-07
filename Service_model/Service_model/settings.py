@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-al0p=^0w-25yr2_9%+0@3@xb4)lkc(g*!0^40-b*=*u0fr=r9*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost','127.0.0.1',]
 
 
 # Application definition
@@ -78,6 +78,9 @@ WSGI_APPLICATION = 'Service_model.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -91,7 +94,6 @@ DATABASES = {
          }
             }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -153,4 +155,6 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'ajit.kumar.fiem.cse17@teamfuture.in'
 EMAIL_HOST_PASSWORD = '#pass1234'
 EMAIL_USE_TLS = True
+
+
 

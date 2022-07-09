@@ -17,6 +17,7 @@ class IsUser(models.Model):
     
 class AuthUser(AbstractUser):
    user = models.ForeignKey(IsUser, on_delete=models.SET_NULL, null=True)
+   
 
 class Specification(models.Model):
     specification = models.CharField(max_length=150)
@@ -222,12 +223,13 @@ class Complaint(models.Model):
             COMPLAINT = Complaint.objects.all()
             for i in COMPLAINT.iterator():
                 send_mail(
-                    ['id-'+ str(i.complaint_id),'serial_no-' + i.serial_no, 'dealer-' + i.dealer_name],
+                    ('id-'+ str(i.complaint_id), 'serial_no -' + i.serial_no, 'dealer-' + i.dealer_name),
                     str(i),
                     'ajitmuskan09@gmail.com',
                     ['sajit4862@gmail.com','analytics@inverted.in'],
                     fail_silently=False,)
          return super().save(*args, **kwargs)
+
 
 
     class Meta:

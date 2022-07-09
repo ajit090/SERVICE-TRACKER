@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-al0p=^0w-25yr2_9%+0@3@xb4)lkc(g*!0^40-b*=*u0fr=r9*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['python-env.eba-ndp9kpep.ap-south-1.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['127.0.0.1','python-env.eba-ndp9kpep.ap-south-1.elasticbeanstalk.com']
 
 
 # Application definition
@@ -153,7 +153,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'ajit.kumar.fiem.cse17@teamfuture.in'
-EMAIL_HOST_PASSWORD = '#pass1234'
+EMAIL_HOST_PASSWORD = 'Ajit@7595'
 EMAIL_USE_TLS = True
 
 
